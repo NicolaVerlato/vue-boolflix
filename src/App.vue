@@ -5,7 +5,7 @@
     </header>
 
     <main>
-      <MainContent v-for="movie, index in movies" :key="index" :movieInfo="movie"/>
+      <MainContent v-for="movie, index in filteredMovie" :key="index" :movieInfo="movie"/>
     </main>
   </div>
 </template>
@@ -28,6 +28,13 @@ export default {
           search: ''
       }
   },
+  computed:{
+    filteredMovie(){
+      return this.movies.filter((item) => {
+        return item.title.toLowerCase().includes(this.search.toLowerCase());  
+      })
+    }
+  },
   methods:{
       getMovie(){
           axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.myApi}&query=${this.search}`)
@@ -36,8 +43,8 @@ export default {
             console.log(this.movies)
           })
       },
-      startSearch(data){
-      this.search = data
+      startSearch(text){
+      this.search = text
       this.getMovie()
     }
   },
