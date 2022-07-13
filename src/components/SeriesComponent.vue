@@ -19,8 +19,8 @@ export default {
 <style lang="scss" scoped>
 .card-container{
     padding: 20px;
-    width: calc(20% - 20px);
     text-align: center;
     margin: 10px;
+    background-color: lightgreen;
 }
 </style>

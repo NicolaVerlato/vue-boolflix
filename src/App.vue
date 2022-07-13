@@ -5,8 +5,12 @@
     </header>
 
     <main>
-      <MainContent v-for="movie, index in movies" :key="index" :movieInfo="movie"/>
-      <SeriesComponent v-for="series, index in series" :key="index" :seriesInfo="series"/>
+      <section>
+        <MainContent v-for="movie in movies" :key="movie.id" :movieInfo="movie"/>
+      </section>
+      <section>
+        <SeriesComponent v-for="series in series" :key="series.id" :seriesInfo="series"/>
+      </section>
     </main>
   </div>
 </template>
@@ -32,18 +36,18 @@ export default {
           search: ''
       }
   },
-  computed:{
-    filteredMovie(){
-      return this.movies.filter((item) => {
-        return  item.title.toLowerCase().includes(this.search.toLowerCase());  
-      })
-    },
-    filteredSeries(){
-      return this.series.filter((item) => {
-        return  item.name.toLowerCase().includes(this.search.toLowerCase());  
-      })
-    }
-  },
+  // computed:{
+  //   filteredMovie(){
+  //     return this.movies.filter((item) => {
+  //       return  item.title.toLowerCase().includes(this.search.toLowerCase());  
+  //     })
+  //   },
+  //   filteredSeries(){
+  //     return this.series.filter((item) => {
+  //       return  item.name.toLowerCase().includes(this.search.toLowerCase());  
+  //     })
+  //   }
+  // },
   methods:{
       getMovie(){
         // chiamata per film
@@ -69,8 +73,9 @@ export default {
 </script>
 
 <style lang="scss">
-main{
-    width: 70%;
+@import './style/common';
+section{
+    width: 80%;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
