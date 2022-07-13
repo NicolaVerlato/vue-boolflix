@@ -74,6 +74,7 @@ export default {
 
 <style lang="scss">
 @import './style/common';
+
 section{
     width: 80%;
     margin: 0 auto;

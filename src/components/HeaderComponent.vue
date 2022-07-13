@@ -3,7 +3,7 @@
         <h1>BOOLFLIX</h1>
 
         <div class="search">
-            <input type="text" placeholder="Cerca un film" v-model="searchText">
+            <input type="text" placeholder="Cerca un film" v-model="searchText" @keyup.enter="$emit('startSearching', searchText)">
             <button @click="$emit('startSearching', searchText)">Search</button>
         </div>
     </div>
@@ -27,7 +27,6 @@ export default {
     align-items: center;
     padding: 20px 40px;
     background-color: black;
-    margin-bottom: 20px;
 
     h1{
         color: red;
@@ -35,6 +34,13 @@ export default {
 
     .search{
         color: white;
+
+        input{
+            padding: 3px;
+        }
+        button{
+            padding: 3px;
+        }
     }
 }
 </style>
