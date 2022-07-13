@@ -5,8 +5,21 @@
         <div class="info">
             <h2>{{ movieInfo.title }}</h2>
             <div>Titolo Originale: {{ movieInfo.original_title }}</div>
-            <div>Lingua: {{ movieInfo.original_language }}</div>
-            <div>Voto: {{ parseInt(movieInfo.vote_average/2) }} <i class="fa fa-star" aria-hidden="true"></i></div>
+
+            <div class="language">
+                Lingua: {{ movieInfo.original_language }}
+            </div>
+            
+
+            <div class="valutazione">
+                <span>
+                    Voto:
+                </span>
+                <i v-for="number in 5" :key="number" :class="number <= stars(movieInfo.vote_average) ? 'fa' : 'fa-regular'" class="fa-star" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div class="overview">
+            <div>Overview: {{ movieInfo.overview }}</div>
         </div>
     </div>
 </template>
@@ -16,7 +29,7 @@ export default {
     name: 'MainContent',
     data(){
         return{
-            star: ''
+            parseNum: []
         }
     },
     props:{
@@ -24,12 +37,8 @@ export default {
     },
     methods:{
         stars(n){
-            let star = `<i class="fa fa-star" aria-hidden="true"></i>`;
-            for(let i = 1; i <= n/2; i++){
-                i += star 
-                console.log(star)
-            }
-            return star
+            this.parseNum = Math.ceil(n/2);
+            return this.parseNum
         }
     }
 }
@@ -37,11 +46,14 @@ export default {
 
 <style lang="scss" scoped>
 .card-container{
-    text-align: center;
     margin: 20px;
     border: 1px solid white;
 
     .info{
+        display: none;
+    }
+
+    .overview{
         display: none;
     }
 
@@ -53,9 +65,16 @@ export default {
         transition-duration: 0.8s;
 
         .info{
-        display: block;
-        padding-top: 30px;
-        transform: rotateY(180deg);
+            padding: 0 10px;
+            display: block;
+            padding-top: 30px;
+            transform: rotateY(180deg);
+        }
+
+        .overview{
+            padding: 0 10px;
+            display: block;
+            transform: rotateY(180deg);
         }
     } 
 

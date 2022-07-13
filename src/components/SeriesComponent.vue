@@ -6,7 +6,17 @@
             <h2>{{ seriesInfo.name }}</h2>
             <div>Titolo Originale: {{ seriesInfo.original_name }}</div>
             <div>Lingua: {{ seriesInfo.original_language }}</div>
-            <div>Voto: {{ seriesInfo.vote_average }}</div>
+
+            <div class="valutazione">
+                <span>
+                    Voto:
+                </span>
+                <i v-for="number in 5" :key="number" :class="number <= stars(seriesInfo.vote_average) ? 'fa' : 'fa-regular'" class="fa-star" aria-hidden="true"></i>
+            </div>
+
+            <div class="overview">
+                <div>Overview: {{ seriesInfo.overview }}</div>
+            </div>
         </div>
     </div>
 </template>
@@ -14,19 +24,33 @@
 <script>
 export default {
     name: 'SeriesComponent',
+    data(){
+        return{
+            parseNum: []
+        }
+    },
     props:{
         seriesInfo: Object
+    },
+    methods:{
+        stars(n){
+            this.parseNum = Math.ceil(n/2);
+            return this.parseNum
+        }
     }
 }
 </script>
 
 <style lang="scss" scoped>
 .card-container{
-    text-align: center;
     margin: 20px;
     border: 1px solid white;
 
     .info{
+        display: none;
+    }
+
+    .overview{
         display: none;
     }
 
@@ -38,9 +62,14 @@ export default {
         transition-duration: 0.8s;
 
         .info{
-        display: block;
-        padding-top: 30px;
-        transform: rotateY(180deg);
+            padding: 0 10px;
+            display: block;
+            padding-top: 30px;
+            transform: rotateY(180deg);
+        }
+
+        .overview{
+            display: block;
         }
     } 
 
