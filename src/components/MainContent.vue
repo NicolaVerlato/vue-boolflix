@@ -3,11 +3,15 @@
         <img v-if="movieInfo.poster_path" :src="`http://image.tmdb.org/t/p/w300/${movieInfo.poster_path}`" :alt="movieInfo.name">
         <img v-else src="https://placehold.jp/30/000000/ffffff/300x450.png?text=Copertina+non+disponibile" alt="copertina">
         <div class="info">
-            <h2>{{ movieInfo.title }}</h2>
-            <div>Titolo Originale: {{ movieInfo.original_title }}</div>
+            <h2>{{ movieInfo.title ? movieInfo.title : movieInfo.name }}</h2>
+            <div>Titolo Originale: {{ movieInfo.original_title ? movieInfo.original_title : movieInfo.original_name }}</div>
 
             <div class="language">
-                Lingua: {{ movieInfo.original_language }}
+                <span>Lingua: </span> 
+
+                <span v-if="flags.includes(movieInfo.original_language)"><img :src="require(`../assets/img/${movieInfo.original_language}.png`)" :alt="movieInfo.original_language"></span>
+                
+                <span v-else>{{ movieInfo.original_language }}</span>
             </div>
             
 
@@ -29,7 +33,8 @@ export default {
     name: 'MainContent',
     data(){
         return{
-            parseNum: []
+            parseNum: [],
+            flags: ['it', 'en']
         }
     },
     props:{
@@ -75,6 +80,14 @@ export default {
             padding: 0 10px;
             display: block;
             transform: rotateY(180deg);
+        }
+
+        .language{
+            display: flex;
+        }
+        .language img{
+            display: block;
+            width: 27px;
         }
     } 
 

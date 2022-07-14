@@ -6,10 +6,12 @@
 
     <main>
       <section>
+        <h2>Film</h2>
         <MainContent v-for="movie in movies" :key="movie.id" :movieInfo="movie"/>
       </section>
       <section>
-        <SeriesComponent v-for="series in series" :key="series.id" :seriesInfo="series"/>
+        <h2>Serie TV</h2>
+        <MainContent v-for="show in series" :key="show.id" :movieInfo="show"/>
       </section>
     </main>
   </div>
@@ -18,41 +20,21 @@
 <script>
 import HeaderComponent from './components/HeaderComponent.vue'
 import MainContent from './components/MainContent.vue'
-import SeriesComponent from './components/SeriesComponent.vue'
 import axios from "axios"
 
 export default {
   name: 'App',
   components: {
     HeaderComponent,
-    MainContent,
-    SeriesComponent
+    MainContent
   },
   data(){
       return{
           myApi: 'efb8e071130f0936789711365b3fd8b4',
           movies: [],
           series: [],
-          search: '',
-          itaFlag: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/255px-Flag_of_Italy.svg.png', 
-          usFlag: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Flag_of_the_United_States_%28Pantone%29.svg/280px-Flag_of_the_United_States_%28Pantone%29.svg.png'
+          search: ''
       }
-  },
-  computed:{
-    filteredMovie(){
-      return this.movies.filter((item) => {
-        console.log(item)
-        if(item.original_language.includes("it")){
-          return item.original_language = this.itaFlag; 
-        }
-         
-      })
-    },
-  //   filteredSeries(){
-  //     return this.series.filter((item) => {
-  //       return  item.name.toLowerCase().includes(this.search.toLowerCase());  
-  //     })
-  //   }
   },
   methods:{
       getMovie(){
