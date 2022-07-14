@@ -3,7 +3,7 @@
         <img v-if="movieInfo.poster_path" :src="`http://image.tmdb.org/t/p/w300/${movieInfo.poster_path}`" :alt="movieInfo.name">
         <img v-else src="https://placehold.jp/30/000000/ffffff/300x450.png?text=Copertina+non+disponibile" alt="copertina">
         <div class="info">
-            <h2>{{ movieInfo.title ? movieInfo.title : movieInfo.name }}</h2>
+            <h3>{{ movieInfo.title ? movieInfo.title : movieInfo.name }}</h3>
             <div>Titolo Originale: {{ movieInfo.original_title ? movieInfo.original_title : movieInfo.original_name }}</div>
 
             <div class="language">
@@ -51,33 +51,43 @@ export default {
 
 <style lang="scss" scoped>
 .card-container{
-    margin: 20px;
+    margin: 10px;
     border: 1px solid white;
+
+    img{
+        display: block;
+        height: 100%;
+        width: 280px;
+    }
 
     .info{
         display: none;
+        padding: 0 10px;
+        padding-top: 30px;
     }
 
     .overview{
         display: none;
+        padding: 0 10px;
     }
 
     &:hover{
         background-color: black;
         color: white;
-        width: 300px;
+        min-width: 282px;
+        max-width: 282px;
+        max-height: 420px;
+        overflow-y: auto;
         transform: rotateY(180deg);
         transition-duration: 0.8s;
+        cursor: pointer;
 
         .info{
-            padding: 0 10px;
             display: block;
-            padding-top: 30px;
             transform: rotateY(180deg);
         }
 
         .overview{
-            padding: 0 10px;
             display: block;
             transform: rotateY(180deg);
         }
@@ -89,16 +99,10 @@ export default {
             display: block;
             width: 27px;
         }
+        img{
+            display: none;
+        }
     } 
-
-    img{
-        display: block;
-        height: 100%;
-    }
-
-    &:hover img{
-        display: none;
-    }
 
     i{
         color: #fffe00;

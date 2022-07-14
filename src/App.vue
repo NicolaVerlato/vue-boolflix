@@ -7,11 +7,16 @@
     <main>
       <section>
         <h2>Film</h2>
-        <MainContent v-for="movie in movies" :key="movie.id" :movieInfo="movie"/>
+        <div class="container">
+          <MainContent v-for="movie in movies" :key="movie.id" :movieInfo="movie"/>
+        </div>
       </section>
+
       <section>
         <h2>Serie TV</h2>
-        <MainContent v-for="show in series" :key="show.id" :movieInfo="show"/>
+        <div class="container">
+           <MainContent v-for="show in series" :key="show.id" :movieInfo="show"/>
+        </div>
       </section>
     </main>
   </div>
@@ -64,10 +69,15 @@ export default {
 @import './style/common';
 
 section{
-    width: 80%;
-    margin: 0 auto;
+  overflow: auto;
+
+  h2{
+    margin-left: 10px;
+    margin-top: 5px;
+  }
+    
+  .container{
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+  }
 }
 </style>
